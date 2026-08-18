@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import ItemCard from '../components/ItemCard'
 import homeBanner from '../assets/home-banner.webp'
+import gehuLogo from '../assets/gehu-logo.jpeg'
 
 const categories = [
   { icon: 'badge', label: 'ID Cards', value: 'id-cards' },
@@ -49,11 +50,19 @@ export default function Home() {
           <div className="absolute inset-0 bg-primary/15 mix-blend-multiply" />
         </div>
         <div className="relative z-10 text-center px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto flex flex-col items-center w-full">
-          <div className="backdrop-blur-md bg-black/30 p-6 sm:p-10 md:p-14 rounded-3xl md:rounded-[2.5rem] border border-white/20 shadow-2xl flex flex-col items-center w-full max-w-4xl animate-fade-in">
-            {/* Campus Tag */}
-            <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-xs sm:text-sm font-bold uppercase tracking-widest mb-4 border border-white/25 shadow-sm">
-              <span className="material-symbols-outlined text-[18px] text-primary-fixed-dim">school</span>
-              <span>Graphic Era Hill University</span>
+          <div className="backdrop-blur-md bg-black/35 p-6 sm:p-10 md:p-14 rounded-3xl md:rounded-[2.5rem] border border-white/20 shadow-2xl flex flex-col items-center w-full max-w-4xl animate-fade-in">
+            {/* Campus Logo & Tag */}
+            <div className="flex flex-col items-center gap-3 mb-4">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full bg-white p-1.5 shadow-2xl shadow-black/60 border-2 border-white/90 flex items-center justify-center hover:scale-105 transition-transform duration-300">
+                <img
+                  src={gehuLogo}
+                  alt="Graphic Era Hill University Logo"
+                  className="w-full h-full object-contain rounded-full"
+                />
+              </div>
+              <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-xs sm:text-sm font-bold uppercase tracking-widest border border-white/25 shadow-sm">
+                <span>Graphic Era Hill University</span>
+              </div>
             </div>
 
             {/* BIG Bold Lost & Found Title */}

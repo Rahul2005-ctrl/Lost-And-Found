@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import gehuLogo from '../assets/gehu-logo.jpeg'
 
 export default function Navbar() {
   const { user, profile, signOut } = useAuth()
@@ -30,8 +31,12 @@ export default function Navbar() {
         <div className="flex justify-between items-center w-full px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto h-16 md:h-20">
           {/* Brand */}
           <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-md shadow-primary/25 group-hover:scale-105 transition-transform shrink-0">
-              <span className="material-symbols-outlined text-2xl md:text-3xl fill">school</span>
+            <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white p-0.5 shadow-md shadow-black/10 border border-outline-variant/30 flex items-center justify-center group-hover:scale-105 transition-transform shrink-0 overflow-hidden">
+              <img
+                src={gehuLogo}
+                alt="Graphic Era Hill University Logo"
+                className="w-full h-full object-contain rounded-full"
+              />
             </div>
             <div className="flex flex-col leading-none">
               <span className="text-[10px] sm:text-xs font-black tracking-widest text-primary uppercase">GEHU</span>

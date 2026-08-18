@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import gehuLogo from '../assets/gehu-logo.jpeg'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -93,8 +94,12 @@ export default function Login() {
 
         {/* Branding Header */}
         <Link to="/" className="flex flex-col items-center text-center gap-1 mb-2 group">
-          <div className="w-12 h-12 rounded-2xl bg-primary text-on-primary flex items-center justify-center shadow-lg shadow-primary/25 mb-2 group-hover:scale-105 transition-transform">
-            <span className="material-symbols-outlined text-3xl fill">school</span>
+          <div className="w-16 h-16 rounded-full bg-white p-1 shadow-md shadow-black/10 border border-outline-variant/30 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform overflow-hidden">
+            <img
+              src={gehuLogo}
+              alt="Graphic Era Hill University Logo"
+              className="w-full h-full object-contain rounded-full"
+            />
           </div>
           <span className="text-xs font-black tracking-widest text-primary uppercase">GEHU CAMPUS</span>
           <h1 className="font-heading text-2xl md:text-3xl font-black text-on-surface tracking-tight uppercase group-hover:text-primary transition-colors">
