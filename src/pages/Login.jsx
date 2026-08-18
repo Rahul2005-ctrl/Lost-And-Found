@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 
@@ -10,12 +10,23 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const [resetMode, setResetMode] = useState(false)
   const [resetSent, setResetSent] = useState(false)
+  const [successMessage, setSuccessMessage] = useState('')
   const [resendVerificationSent, setResendVerificationSent] = useState(false)
   const [resendingVerification, setResendingVerification] = useState(false)
-  const { signIn, resetPassword, resendVerification } = useAuth()
+  const { user, signIn, resetPassword, resendVerification } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   const redirectTo = location.state?.from || '/'
+
+  useEffect(() => {
+    // Check if coming from email confirmation or auth hash
+    const hash = window.location.hash || ''
+    if (hash.includes('type=signup') || hash.includes('type=email_confirmation') || hash.includes('access_token')) {
+      setSuccessMessage('Email verified successfully! You can now log in.')
+    } else if (hash.includes('type=recovery')) {
+      setSuccessMessage('Password recovery link verified. Please log in with your updated credentials.')
+    }
+  }, [])
 
   const isEmailNotConfirmed = error && error.toLowerCase().includes('email not confirmed')
 
@@ -38,6 +49,7 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault()
     setError('')
+    setSuccessMessage('')
     setResendVerificationSent(false)
     setLoading(true)
     try {
@@ -74,6 +86,12 @@ export default function Login() {
             {resetMode ? 'Enter your college email to reset your password.' : 'Welcome back! Please log in to continue.'}
           </p>
         </div>
+
+        {successMessage && (
+          <div className="bg-status-found-bg text-status-found-text px-4 py-3 rounded-lg font-body text-sm text-center">
+            {successMessage}
+          </div>
+        )}
 
         {error && (
           <div className="bg-error-container text-on-error-container px-4 py-3 rounded-lg font-body text-sm flex flex-col gap-2">

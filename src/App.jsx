@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -11,6 +11,7 @@ import ItemDetails from './pages/ItemDetails'
 import Profile from './pages/Profile'
 import EditProfile from './pages/EditProfile'
 import MyItems from './pages/MyItems'
+import NotFound from './pages/NotFound'
 
 function Layout({ children, hideNavFooter }) {
   return (
@@ -30,6 +31,13 @@ export default function App() {
           <Route path="/" element={<Layout><Home /></Layout>} />
           <Route path="/login" element={<Layout hideNavFooter><Login /></Layout>} />
           <Route path="/signup" element={<Layout hideNavFooter><SignUp /></Layout>} />
+          
+          {/* Route Aliases */}
+          <Route path="/signin" element={<Navigate to="/login" replace />} />
+          <Route path="/sign-in" element={<Navigate to="/login" replace />} />
+          <Route path="/sign-up" element={<Navigate to="/signup" replace />} />
+          <Route path="/register" element={<Navigate to="/signup" replace />} />
+          
           <Route path="/lost" element={<Layout><ItemsFeed feedType="lost" /></Layout>} />
           <Route path="/found" element={<Layout><ItemsFeed feedType="found" /></Layout>} />
           <Route path="/report" element={<Layout><ReportItem /></Layout>} />
@@ -37,6 +45,9 @@ export default function App() {
           <Route path="/profile" element={<Layout><Profile /></Layout>} />
           <Route path="/profile/edit" element={<Layout><EditProfile /></Layout>} />
           <Route path="/profile/my-items" element={<Layout><MyItems /></Layout>} />
+
+          {/* 404 Catch-All */}
+          <Route path="*" element={<Layout><NotFound /></Layout>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

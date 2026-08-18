@@ -71,10 +71,12 @@ export function AuthProvider({ children }) {
   }
 
   async function signUp({ email, password, name, phone, profilePhoto }) {
+    const redirectUrl = typeof window !== 'undefined' ? `${window.location.origin}/login` : undefined
     const { data, error } = await supabase.auth.signUp({ 
       email, 
       password,
       options: {
+        emailRedirectTo: redirectUrl,
         data: {
           full_name: name,
           phone: phone || null,
@@ -134,9 +136,13 @@ export function AuthProvider({ children }) {
   }
 
   async function resendVerification(email) {
+    const redirectUrl = typeof window !== 'undefined' ? `${window.location.origin}/login` : undefined
     const { data, error } = await supabase.auth.resend({
       type: 'signup',
       email,
+      options: {
+        emailRedirectTo: redirectUrl,
+      }
     })
     if (error) throw error
     return data
@@ -156,7 +162,10 @@ export function AuthProvider({ children }) {
   }
 
   async function resetPassword(email) {
-    const { error } = await supabase.auth.resetPasswordForEmail(email)
+    const redirectUrl = typeof window !== 'undefined' ? `${window.location.origin}/login` : undefined
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: redirectUrl,
+    })
     if (error) throw error
   }
 
