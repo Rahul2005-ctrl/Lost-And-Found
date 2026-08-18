@@ -143,14 +143,14 @@ export default function Login() {
             Password reset email sent! Check your inbox.
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-stack-md w-full">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
             {/* Email */}
-            <div className="flex flex-col gap-1">
-              <label className="font-body text-sm font-semibold text-on-surface" htmlFor="email">
+            <div className="flex flex-col gap-1.5">
+              <label className="font-body text-xs font-bold uppercase tracking-wider text-on-surface" htmlFor="email">
                 College Email
               </label>
-              <div className="relative group">
-                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">
+              <div className="relative flex items-center group">
+                <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">
                   mail
                 </span>
                 <input
@@ -160,7 +160,7 @@ export default function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="student@gehu.ac.in"
                   required
-                  className="input-field pl-10"
+                  className="input-field has-left-icon"
                 />
               </div>
             </div>
@@ -168,12 +168,12 @@ export default function Login() {
             {!resetMode && (
               <>
                 {/* Password */}
-                <div className="flex flex-col gap-1">
-                  <label className="font-body text-sm font-semibold text-on-surface" htmlFor="password">
+                <div className="flex flex-col gap-1.5">
+                  <label className="font-body text-xs font-bold uppercase tracking-wider text-on-surface" htmlFor="password">
                     Password
                   </label>
-                  <div className="relative group">
-                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">
+                  <div className="relative flex items-center group">
+                    <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">
                       lock
                     </span>
                     <input
@@ -183,12 +183,12 @@ export default function Login() {
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
                       required
-                      className="input-field pl-10 pr-10"
+                      className="input-field has-left-icon has-right-icon"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors"
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-variant/40 transition-colors flex items-center justify-center"
                     >
                       <span className="material-symbols-outlined text-[20px]">
                         {showPassword ? 'visibility' : 'visibility_off'}
@@ -198,11 +198,11 @@ export default function Login() {
                 </div>
 
                 {/* Forgot Password */}
-                <div className="flex justify-end w-full">
+                <div className="flex justify-end w-full -mt-1">
                   <button
                     type="button"
                     onClick={() => setResetMode(true)}
-                    className="font-body text-sm font-semibold text-primary hover:underline"
+                    className="font-body text-xs font-semibold text-primary hover:underline"
                   >
                     Forgot Password?
                   </button>

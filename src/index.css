@@ -101,24 +101,38 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--color-surface-muted);
   color: var(--color-on-surface);
   font-family: var(--font-body);
-  font-size: 16px; /* Prevents auto-zoom on iOS mobile */
+  font-size: 15px; /* Comfortable legible text size */
   line-height: 24px;
-  border-radius: 0.75rem;
-  padding: 0.75rem 1rem;
-  border: 2px solid transparent;
+  border-radius: 0.85rem;
+  padding: 0.85rem 1.15rem;
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
   outline: none;
   transition: all 0.2s ease-in-out;
-  min-height: 48px; /* Touch target minimum */
+  min-height: 50px;
+  box-sizing: border-box;
+}
+
+.input-field.has-left-icon,
+.input-field[class*="pl-"] {
+  padding-left: 3rem !important;
+}
+
+.input-field.has-right-icon,
+.input-field[class*="pr-10"],
+.input-field[class*="pr-11"],
+.input-field[class*="pr-12"] {
+  padding-right: 3rem !important;
 }
 
 .input-field:focus {
   border-color: var(--color-primary);
   background-color: var(--color-surface);
-  box-shadow: 0 0 0 4px rgba(175, 16, 26, 0.1);
+  box-shadow: 0 0 0 4px rgba(175, 16, 26, 0.12);
 }
 
 .input-field::placeholder {
-  color: var(--color-on-secondary-container);
+  color: var(--color-on-surface-variant);
+  opacity: 0.65;
 }
 
 /* === AMBIENT SHADOW from Stitch === */

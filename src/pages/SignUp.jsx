@@ -221,64 +221,130 @@ export default function SignUp() {
           <div className="bg-error-container text-on-error-container px-4 py-3 rounded-lg font-body text-sm">{error}</div>
         )}
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-stack-md w-full">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-5 w-full">
           {/* Profile Photo */}
           <div>
-            <label className="font-body text-sm font-semibold text-on-surface-variant mb-2 block">
+            <label className="font-body text-xs font-bold uppercase tracking-wider text-on-surface mb-2 block">
               Profile Photo (optional)
             </label>
             <ImageUpload onFileSelect={setProfilePhoto} preview={photoPreview} setPreview={setPhotoPreview} />
           </div>
 
           {/* Full Name */}
-          <div className="flex flex-col gap-1">
-            <label className="font-body text-sm font-semibold text-on-surface" htmlFor="name">Full Name</label>
-            <div className="relative group">
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">person</span>
-              <input id="name" type="text" value={form.name} onChange={update('name')} placeholder="Aarav Sharma" required className="input-field pl-10" />
+          <div className="flex flex-col gap-1.5">
+            <label className="font-body text-xs font-bold uppercase tracking-wider text-on-surface" htmlFor="name">
+              Full Name
+            </label>
+            <div className="relative flex items-center group">
+              <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">
+                person
+              </span>
+              <input
+                id="name"
+                type="text"
+                value={form.name}
+                onChange={update('name')}
+                placeholder="Aarav Sharma"
+                required
+                className="input-field has-left-icon"
+              />
             </div>
           </div>
 
           {/* College Email */}
-          <div className="flex flex-col gap-1">
-            <label className="font-body text-sm font-semibold text-on-surface" htmlFor="email">College Email</label>
-            <div className="relative group">
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">mail</span>
-              <input id="email" type="email" value={form.email} onChange={update('email')} placeholder="student@gehu.ac.in" required className="input-field pl-10" />
+          <div className="flex flex-col gap-1.5">
+            <label className="font-body text-xs font-bold uppercase tracking-wider text-on-surface" htmlFor="email">
+              College Email
+            </label>
+            <div className="relative flex items-center group">
+              <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">
+                mail
+              </span>
+              <input
+                id="email"
+                type="email"
+                value={form.email}
+                onChange={update('email')}
+                placeholder="student@gehu.ac.in"
+                required
+                className="input-field has-left-icon"
+              />
             </div>
           </div>
 
           {/* Phone */}
-          <div className="flex flex-col gap-1">
-            <label className="font-body text-sm font-semibold text-on-surface" htmlFor="phone">Phone (optional)</label>
-            <div className="relative group">
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">phone</span>
-              <input id="phone" type="tel" value={form.phone} onChange={update('phone')} placeholder="+91 98765 43210" className="input-field pl-10" />
+          <div className="flex flex-col gap-1.5">
+            <label className="font-body text-xs font-bold uppercase tracking-wider text-on-surface" htmlFor="phone">
+              Phone Number (optional)
+            </label>
+            <div className="relative flex items-center group">
+              <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">
+                phone
+              </span>
+              <input
+                id="phone"
+                type="tel"
+                value={form.phone}
+                onChange={update('phone')}
+                placeholder="+91 98765 43210"
+                className="input-field has-left-icon"
+              />
             </div>
           </div>
 
           {/* Password */}
-          <div className="flex flex-col gap-1">
-            <label className="font-body text-sm font-semibold text-on-surface" htmlFor="password">Password</label>
-            <div className="relative group">
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">lock</span>
-              <input id="password" type={showPassword ? 'text' : 'password'} value={form.password} onChange={update('password')} placeholder="••••••••" required minLength={6} className="input-field pl-10 pr-10" />
-              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors">
-                <span className="material-symbols-outlined text-[20px]">{showPassword ? 'visibility' : 'visibility_off'}</span>
+          <div className="flex flex-col gap-1.5">
+            <label className="font-body text-xs font-bold uppercase tracking-wider text-on-surface" htmlFor="password">
+              Password
+            </label>
+            <div className="relative flex items-center group">
+              <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">
+                lock
+              </span>
+              <input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                value={form.password}
+                onChange={update('password')}
+                placeholder="••••••••"
+                required
+                minLength={6}
+                className="input-field has-left-icon has-right-icon"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface p-1 rounded-lg hover:bg-surface-variant/40 transition-colors flex items-center justify-center"
+              >
+                <span className="material-symbols-outlined text-[20px]">
+                  {showPassword ? 'visibility' : 'visibility_off'}
+                </span>
               </button>
             </div>
           </div>
 
           {/* Confirm Password */}
-          <div className="flex flex-col gap-1">
-            <label className="font-body text-sm font-semibold text-on-surface" htmlFor="confirmPassword">Confirm Password</label>
-            <div className="relative group">
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">lock</span>
-              <input id="confirmPassword" type="password" value={form.confirmPassword} onChange={update('confirmPassword')} placeholder="••••••••" required className="input-field pl-10" />
+          <div className="flex flex-col gap-1.5">
+            <label className="font-body text-xs font-bold uppercase tracking-wider text-on-surface" htmlFor="confirmPassword">
+              Confirm Password
+            </label>
+            <div className="relative flex items-center group">
+              <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">
+                lock
+              </span>
+              <input
+                id="confirmPassword"
+                type="password"
+                value={form.confirmPassword}
+                onChange={update('confirmPassword')}
+                placeholder="••••••••"
+                required
+                className="input-field has-left-icon"
+              />
             </div>
           </div>
 
-          <button type="submit" disabled={loading} className="w-full bg-primary text-on-primary font-body text-sm font-semibold py-3 px-4 rounded-lg shadow-sm hover:bg-surface-tint hover:shadow-md active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-2 disabled:opacity-60">
+          <button type="submit" disabled={loading} className="w-full bg-primary text-on-primary font-body text-sm font-semibold py-3.5 px-4 rounded-xl shadow-sm hover:bg-surface-tint hover:shadow-md active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-2 disabled:opacity-60">
             {loading ? (
               <div className="w-5 h-5 border-2 border-on-primary border-t-transparent rounded-full animate-spin" />
             ) : (
