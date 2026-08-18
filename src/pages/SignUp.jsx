@@ -137,6 +137,14 @@ export default function SignUp() {
               <span className="material-symbols-outlined text-[20px]">login</span>
             </Link>
 
+            <Link
+              to="/"
+              className="w-full bg-surface-muted text-on-surface hover:bg-surface-variant font-body text-sm font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 border border-outline-variant/30"
+            >
+              <span className="material-symbols-outlined text-[18px]">home</span>
+              <span>Back to Home</span>
+            </Link>
+
             <button
               type="button"
               onClick={handleResend}
@@ -172,18 +180,37 @@ export default function SignUp() {
       <div className="absolute bottom-[-10%] right-[-10%] w-[30vw] h-[30vw] rounded-full bg-error-container/30 blur-3xl pointer-events-none" />
 
       <div className="bg-surface-container-lowest w-full max-w-[480px] rounded-xl p-stack-lg md:p-8 shadow-ambient flex flex-col gap-stack-lg animate-fade-in relative z-10">
-        <div className="flex flex-col items-center text-center gap-1 mb-2">
-          <div className="w-12 h-12 rounded-2xl bg-primary text-on-primary flex items-center justify-center shadow-lg shadow-primary/25 mb-2">
+        {/* Back to Home Link */}
+        <div className="flex items-center justify-between">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-on-surface-variant hover:text-primary transition-colors py-1 px-2.5 rounded-lg hover:bg-surface-muted -ml-2"
+          >
+            <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+            <span>Back to Home</span>
+          </Link>
+          <Link
+            to="/"
+            className="text-xs font-semibold text-primary hover:underline flex items-center gap-1"
+          >
+            <span className="material-symbols-outlined text-[16px]">home</span>
+            <span>Home</span>
+          </Link>
+        </div>
+
+        {/* Branding Header */}
+        <Link to="/" className="flex flex-col items-center text-center gap-1 mb-2 group">
+          <div className="w-12 h-12 rounded-2xl bg-primary text-on-primary flex items-center justify-center shadow-lg shadow-primary/25 mb-2 group-hover:scale-105 transition-transform">
             <span className="material-symbols-outlined text-3xl fill">school</span>
           </div>
           <span className="text-xs font-black tracking-widest text-primary uppercase">GEHU LOST & FOUND</span>
-          <h1 className="font-heading text-2xl md:text-3xl font-black text-on-surface tracking-tight">
+          <h1 className="font-heading text-2xl md:text-3xl font-black text-on-surface tracking-tight group-hover:text-primary transition-colors">
             Create Account
           </h1>
           <p className="font-body text-sm text-on-surface-variant mt-1">
             Join the campus community to report and recover lost items.
           </p>
-        </div>
+        </Link>
 
         {error && (
           <div className="bg-error-container text-on-error-container px-4 py-3 rounded-lg font-body text-sm">{error}</div>
@@ -265,6 +292,22 @@ export default function SignUp() {
               Log In
             </Link>
           </p>
+        </div>
+
+        {/* Quick return to Home */}
+        <div className="flex items-center justify-center gap-4 text-xs text-on-surface-variant pt-2 border-t border-outline-variant/20">
+          <Link to="/" className="hover:text-primary transition-colors flex items-center gap-1 font-medium">
+            <span className="material-symbols-outlined text-[16px]">home</span>
+            <span>Home</span>
+          </Link>
+          <span>•</span>
+          <Link to="/lost" className="hover:text-primary transition-colors">
+            Browse Lost Items
+          </Link>
+          <span>•</span>
+          <Link to="/found" className="hover:text-primary transition-colors">
+            Found Items
+          </Link>
         </div>
       </div>
     </main>
