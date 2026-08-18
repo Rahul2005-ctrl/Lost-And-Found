@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import ItemCard from '../components/ItemCard'
+import homeBanner from '../assets/home-banner.webp'
 
 const categories = [
   { icon: 'badge', label: 'ID Cards', value: 'id-cards' },
@@ -34,10 +35,18 @@ export default function Home() {
   return (
     <main className="bg-dots pb-20 md:pb-0">
       {/* Hero Section */}
-      <section className="relative w-full min-h-[520px] md:min-h-[620px] flex items-center justify-center overflow-hidden py-12 md:py-20">
-        <div className="absolute inset-0 z-0">
-          <div className="w-full h-full bg-gradient-to-br from-primary via-primary-container to-on-primary-fixed" />
-          <div className="absolute inset-0 bg-black/40" />
+      <section className="relative w-full min-h-[540px] sm:min-h-[580px] md:min-h-[660px] flex items-center justify-center overflow-hidden py-14 sm:py-16 md:py-24">
+        {/* Responsive Background Banner Image & Overlays */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <img
+            src={homeBanner}
+            alt="GEHU Campus Banner"
+            className="w-full h-full object-cover object-center scale-[1.02] filter brightness-[0.82] contrast-[1.05]"
+            loading="eager"
+          />
+          {/* Subtle gradient overlays for flawless text legibility across all screen sizes */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/70" />
+          <div className="absolute inset-0 bg-primary/15 mix-blend-multiply" />
         </div>
         <div className="relative z-10 text-center px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto flex flex-col items-center w-full">
           <div className="backdrop-blur-md bg-black/30 p-6 sm:p-10 md:p-14 rounded-3xl md:rounded-[2.5rem] border border-white/20 shadow-2xl flex flex-col items-center w-full max-w-4xl animate-fade-in">
