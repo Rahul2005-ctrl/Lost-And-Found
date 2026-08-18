@@ -37,20 +37,19 @@ export default function Home() {
     <main className="bg-dots pb-20 md:pb-0">
       {/* Hero Section */}
       <section className="relative w-full min-h-[540px] sm:min-h-[580px] md:min-h-[660px] flex items-center justify-center overflow-hidden py-14 sm:py-16 md:py-24">
-        {/* Responsive Background Banner Image & Overlays */}
+        {/* Crystal Clear Background Banner Image */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
             src={homeBanner}
             alt="GEHU Campus Banner"
-            className="w-full h-full object-cover object-center scale-[1.02] filter brightness-[0.82] contrast-[1.05]"
+            className="w-full h-full object-cover object-center filter brightness-95"
             loading="eager"
           />
-          {/* Subtle gradient overlays for flawless text legibility across all screen sizes */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/70" />
-          <div className="absolute inset-0 bg-primary/15 mix-blend-multiply" />
+          {/* Light gradient overlay just to protect text contrast while keeping photo 100% visible and clear */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/40" />
         </div>
         <div className="relative z-10 text-center px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto flex flex-col items-center w-full">
-          <div className="backdrop-blur-md bg-black/35 p-6 sm:p-10 md:p-14 rounded-3xl md:rounded-[2.5rem] border border-white/20 shadow-2xl flex flex-col items-center w-full max-w-4xl animate-fade-in">
+          <div className="bg-black/25 p-6 sm:p-10 md:p-14 rounded-3xl md:rounded-[2.5rem] border border-white/20 shadow-2xl flex flex-col items-center w-full max-w-4xl animate-fade-in">
             {/* Campus Logo & Tag */}
             <div className="flex flex-col items-center gap-3 mb-4">
               <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full bg-white p-1.5 shadow-2xl shadow-black/60 border-2 border-white/90 flex items-center justify-center hover:scale-105 transition-transform duration-300">
