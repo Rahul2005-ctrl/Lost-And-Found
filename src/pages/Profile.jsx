@@ -15,12 +15,10 @@ export default function Profile() {
       navigate('/login', { state: { from: '/profile' } })
     }
     if (user) {
-      if (!profile) {
-        fetchProfile(user.id)
-      }
+      fetchProfile(user.id)
       fetchCounts()
     }
-  }, [user, authLoading, profile])
+  }, [user, authLoading])
 
   async function fetchCounts() {
     setLoadingCounts(true)
@@ -77,7 +75,7 @@ export default function Profile() {
           {/* Photo */}
           <div className="relative shrink-0">
             <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full bg-surface-muted border-4 border-surface shadow-md overflow-hidden flex items-center justify-center">
-              {displayProfile.profile_photo ? (
+              {displayProfile.profile_photo && displayProfile.profile_photo !== '' ? (
                 <img src={displayProfile.profile_photo} alt="" className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-on-surface-variant">

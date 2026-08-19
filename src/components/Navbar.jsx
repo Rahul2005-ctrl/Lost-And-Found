@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import gehuLogo from '../assets/gehu-logo.jpeg'
@@ -7,7 +6,6 @@ export default function Navbar() {
   const { user, profile, signOut } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
-  const [mobileOpen, setMobileOpen] = useState(false)
 
   const links = [
     { to: '/', label: 'Home', icon: 'home' },
@@ -21,7 +19,6 @@ export default function Navbar() {
   const handleLogout = async () => {
     await signOut()
     navigate('/')
-    setMobileOpen(false)
   }
 
   return (
@@ -70,7 +67,7 @@ export default function Navbar() {
                 to="/profile"
                 className="hidden md:flex items-center gap-2 text-primary font-semibold text-sm hover:bg-surface-container-low px-3 py-2 rounded-xl transition-colors"
               >
-                {profile?.profile_photo ? (
+                {profile?.profile_photo && profile.profile_photo !== '' ? (
                   <img src={profile.profile_photo} alt="" className="w-8 h-8 rounded-full object-cover border-2 border-primary/20" />
                 ) : (
                   <span className="material-symbols-outlined text-2xl">account_circle</span>
@@ -86,70 +83,8 @@ export default function Navbar() {
               </Link>
             )}
 
-            {/* Mobile Menu Toggle */}
-            <button
-              className="md:hidden text-on-surface p-2 rounded-xl hover:bg-surface-muted transition-colors flex items-center justify-center"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Toggle Menu"
-            >
-              <span className="material-symbols-outlined text-28px">{mobileOpen ? 'close' : 'menu'}</span>
-            </button>
           </div>
         </div>
-
-        {/* Mobile Dropdown Menu */}
-        {mobileOpen && (
-          <div className="md:hidden bg-surface border-t border-outline-variant/30 animate-fade-in shadow-xl">
-            <div className="flex flex-col p-4 gap-1.5">
-              {links.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  onClick={() => setMobileOpen(false)}
-                  className={`font-body text-base py-3 px-4 rounded-xl flex items-center gap-3 transition-colors ${
-                    isActive(link.to)
-                      ? 'text-primary bg-primary/10 font-bold'
-                      : 'text-on-surface-variant hover:bg-surface-muted'
-                  }`}
-                >
-                  <span className="material-symbols-outlined text-[22px]">{link.icon}</span>
-                  <span>{link.label}</span>
-                </Link>
-              ))}
-
-              <hr className="border-outline-variant/30 my-2" />
-
-              {user ? (
-                <>
-                  <Link
-                    to="/profile"
-                    onClick={() => setMobileOpen(false)}
-                    className="font-body text-base py-3 px-4 rounded-xl text-primary font-semibold hover:bg-surface-muted flex items-center gap-3"
-                  >
-                    <span className="material-symbols-outlined text-[22px]">person</span>
-                    <span>My Profile ({profile?.name?.split(' ')[0] || 'Account'})</span>
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="font-body text-base py-3 px-4 rounded-xl text-error font-semibold hover:bg-error-container/20 text-left flex items-center gap-3"
-                  >
-                    <span className="material-symbols-outlined text-[22px]">logout</span>
-                    <span>Log Out</span>
-                  </button>
-                </>
-              ) : (
-                <Link
-                  to="/login"
-                  onClick={() => setMobileOpen(false)}
-                  className="bg-primary text-on-primary font-body text-base font-semibold py-3.5 px-4 rounded-xl text-center shadow-sm active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-1"
-                >
-                  <span>Log In / Sign Up</span>
-                  <span className="material-symbols-outlined text-[20px]">login</span>
-                </Link>
-              )}
-            </div>
-          </div>
-        )}
       </nav>
 
       {/* Mobile Bottom Navigation Bar (Fixed for quick 1-thumb reach) */}

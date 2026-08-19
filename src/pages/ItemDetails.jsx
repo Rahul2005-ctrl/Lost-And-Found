@@ -96,14 +96,15 @@ export default function ItemDetails() {
 
   function handlePrimaryContact() {
     const pref = item?.contact_method || reporter?.preferred_contact || 'email'
+    const hasPhone = reporter?.phone || item?.contact_phone
     if (pref === 'whatsapp') {
-      if (reporter?.phone) {
+      if (hasPhone) {
         handleWhatsAppContact()
       } else {
         handleEmailContact()
       }
     } else if (pref === 'phone') {
-      if (reporter?.phone) {
+      if (hasPhone) {
         handlePhoneCall()
       } else {
         handleEmailContact()
@@ -223,7 +224,7 @@ export default function ItemDetails() {
             <div className="flex flex-col gap-3.5 p-4 sm:p-5 bg-surface border border-outline-variant/30 rounded-2xl shadow-level-1">
               <div className="flex items-center gap-3.5">
                 <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-surface-muted bg-surface-container shrink-0">
-                  {reporter.profile_photo ? (
+                  {reporter.profile_photo && reporter.profile_photo !== '' ? (
                     <img src={reporter.profile_photo} alt="" className="w-full h-full object-cover" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-on-surface-variant">
@@ -297,7 +298,7 @@ export default function ItemDetails() {
                       <button
                         type="button"
                         onClick={handlePhoneCall}
-                        disabled={!reporter.phone}
+                        disabled={!reporter.phone && !item?.contact_phone}
                         className="flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-surface-muted hover:bg-surface-variant text-on-surface border border-outline-variant/30 font-body text-xs font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed min-h-[44px]"
                         title={reporter.phone || 'Phone number not available'}
                       >
@@ -309,7 +310,7 @@ export default function ItemDetails() {
                       <button
                         type="button"
                         onClick={handleWhatsAppContact}
-                        disabled={!reporter.phone}
+                        disabled={!reporter.phone && !item?.contact_phone}
                         className="flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-surface-muted hover:bg-surface-variant text-on-surface border border-outline-variant/30 font-body text-xs font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed min-h-[44px]"
                         title={reporter.phone ? 'Open WhatsApp Chat' : 'Phone number not available'}
                       >

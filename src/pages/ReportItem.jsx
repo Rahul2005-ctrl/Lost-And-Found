@@ -41,6 +41,7 @@ export default function ReportItem() {
   const [form, setForm] = useState({
     item_name: '', category: '', date: '', time: '', location: '',
     specific_location: '', description: '', current_location: '', contact_method: 'email',
+    contact_phone: '',
   })
   const [imageFile, setImageFile] = useState(null)
   const [imagePreview, setImagePreview] = useState(null)
@@ -48,6 +49,13 @@ export default function ReportItem() {
   const [error, setError] = useState('')
   const { user, profile } = useAuth()
   const navigate = useNavigate()
+
+  // Pre-fill phone from profile when available
+  useEffect(() => {
+    if (profile?.phone && !form.contact_phone) {
+      setForm(prev => ({ ...prev, contact_phone: profile.phone }))
+    }
+  }, [profile])
 
   useEffect(() => {
     if (!user) {
@@ -82,7 +90,7 @@ export default function ReportItem() {
           id: user.id,
           name: profile?.name || user.user_metadata?.full_name || user.email?.split('@')[0] || 'Student',
           email: user.email,
-          phone: profile?.phone || user.user_metadata?.phone || null,
+          phone: form.contact_phone || profile?.phone || user.user_metadata?.phone || null,
           profile_photo: profile?.profile_photo || null,
           preferred_contact: form.contact_method || profile?.preferred_contact || 'email',
         })
@@ -101,6 +109,8 @@ export default function ReportItem() {
         description: form.description || null,
         current_location: type === 'found' ? form.current_location : null,
         contact_method: form.contact_method,
+        contact_phone: (form.contact_method === 'phone' || form.contact_method === 'whatsapp') ? (form.contact_phone || null) : null,
+        contact_email: user.email || null,
         status: 'active',
       })
       if (insertError) throw insertError
@@ -261,7 +271,7 @@ export default function ReportItem() {
             <label className="block font-body text-xs sm:text-sm font-semibold text-on-surface-variant mb-2">Preferred Contact Method</label>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
               {[
-                { value: 'email', label: 'University Email', icon: 'mail' },
+                { value: 'email', label: 'Email', icon: 'mail' },
                 { value: 'phone', label: 'Phone Call', icon: 'call' },
                 { value: 'whatsapp', label: 'WhatsApp', icon: 'chat' },
               ].map((opt) => (
@@ -286,6 +296,33 @@ export default function ReportItem() {
                 </label>
               ))}
             </div>
+
+            {/* Phone Number Input (shown when phone or whatsapp is selected) */}
+            {(form.contact_method === 'phone' || form.contact_method === 'whatsapp') && (
+              <div className="mt-3">
+                <label className="block font-body text-xs sm:text-sm font-semibold text-on-surface-variant mb-1.5" htmlFor="contactPhone">
+                  Your Phone Number {form.contact_method === 'whatsapp' ? '(WhatsApp)' : '(for Calls)'} *
+                </label>
+                <div className="relative flex items-center group">
+                  <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant group-focus-within:text-primary transition-colors pointer-events-none">
+                    {form.contact_method === 'whatsapp' ? 'chat' : 'call'}
+                  </span>
+                  <input
+                    id="contactPhone"
+                    type="tel"
+                    className="input-field pl-11"
+                    value={form.contact_phone}
+                    onChange={update('contact_phone')}
+                    placeholder="+91 98765 43210"
+                    required
+                  />
+                </div>
+                <p className="font-body text-[11px] text-on-surface-variant mt-1 flex items-center gap-1">
+                  <span className="material-symbols-outlined text-[14px]">info</span>
+                  This number will be shared with people who want to contact you about this item.
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Submit Button */}
