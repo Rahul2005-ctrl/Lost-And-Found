@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  /* === COLORS from Stitch Design System === */
+  /* === COLORS === */
+  /* Enriched Premium Red Palette */
   --color-primary: #af101a;
-  --color-primary-container: #d32f2f;
+  --color-primary-container: #820912;
   --color-primary-fixed: #ffdad6;
   --color-primary-fixed-dim: #ffb3ac;
   --color-on-primary: #ffffff;
@@ -12,17 +13,18 @@
   --color-on-primary-fixed-variant: #930010;
   --color-inverse-primary: #ffb3ac;
 
-  --color-secondary: #5f5e5e;
-  --color-secondary-container: #e2dfde;
-  --color-secondary-fixed: #e5e2e1;
-  --color-secondary-fixed-dim: #c8c6c5;
+  /* Cooler, Sleeker Grays for Modern UI */
+  --color-secondary: #4a4a55;
+  --color-secondary-container: #e2e2ec;
+  --color-secondary-fixed: #e5e5f0;
+  --color-secondary-fixed-dim: #c5c5d0;
   --color-on-secondary: #ffffff;
-  --color-on-secondary-container: #636262;
-  --color-on-secondary-fixed: #1b1c1c;
-  --color-on-secondary-fixed-variant: #474746;
+  --color-on-secondary-container: #2b2b35;
+  --color-on-secondary-fixed: #15151c;
+  --color-on-secondary-fixed-variant: #3e3e4a;
 
   --color-tertiary: #005f7b;
-  --color-tertiary-container: #00799c;
+  --color-tertiary-container: #004d65;
   --color-tertiary-fixed: #bee9ff;
   --color-tertiary-fixed-dim: #7bd1f8;
   --color-on-tertiary: #ffffff;
@@ -35,35 +37,37 @@
   --color-on-error: #ffffff;
   --color-on-error-container: #93000a;
 
-  --color-surface: #fff8f7;
-  --color-surface-dim: #f1d3d0;
-  --color-surface-bright: #fff8f7;
-  --color-surface-muted: #F5F7F9;
-  --color-surface-variant: #f9dcd9;
+  /* Crisp, bright surfaces for high contrast against primary red */
+  --color-surface: #ffffff;
+  --color-surface-dim: #f3f3f8;
+  --color-surface-bright: #ffffff;
+  --color-surface-muted: #f5f5f9;
+  --color-surface-variant: #eaeaef;
   --color-surface-tint: #ba1a20;
-  --color-surface-container: #ffe9e7;
-  --color-surface-container-low: #fff0ef;
-  --color-surface-container-high: #ffe2de;
-  --color-surface-container-highest: #f9dcd9;
+  --color-surface-container: #fafafc;
+  --color-surface-container-low: #f7f7fa;
+  --color-surface-container-high: #f1f1f6;
+  --color-surface-container-highest: #ebebf2;
   --color-surface-container-lowest: #ffffff;
-  --color-on-surface: #271816;
-  --color-on-surface-variant: #5b403d;
-  --color-inverse-surface: #3e2c2a;
-  --color-inverse-on-surface: #ffedeb;
+  --color-on-surface: #111116;
+  --color-on-surface-variant: #4a4a55;
+  --color-inverse-surface: #202028;
+  --color-inverse-on-surface: #f3f3f8;
 
-  --color-background: #fff8f7;
-  --color-on-background: #271816;
-  --color-outline: #8f6f6c;
-  --color-outline-variant: #e4beba;
+  --color-background: #fdfdff;
+  --color-on-background: #111116;
+  --color-outline: #8c8c9a;
+  --color-outline-variant: #c8c8d2;
 
-  --color-status-lost-bg: #FFF3E0;
-  --color-status-lost-text: #E65100;
-  --color-status-found-bg: #E8F5E9;
-  --color-status-found-text: #2E7D32;
+  /* Refined Status Colors */
+  --color-status-lost-bg: #fff0e6;
+  --color-status-lost-text: #e65100;
+  --color-status-found-bg: #e8f5e9;
+  --color-status-found-text: #2e7d32;
 
   /* === FONTS === */
-  --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
-  --font-body: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Poppins', sans-serif;
 
   /* === SPACING === */
   --spacing-stack-sm: 8px;
@@ -87,28 +91,32 @@ body {
   color: var(--color-on-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   -webkit-tap-highlight-color: transparent;
   overflow-x: hidden;
+  letter-spacing: -0.015em;
+  line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
+  letter-spacing: -0.03em;
 }
 
-/* === INPUT STYLES matching Stitch === */
+/* === PREMIUM INPUT STYLES === */
 .input-field {
   width: 100%;
   background-color: var(--color-surface-muted);
   color: var(--color-on-surface);
   font-family: var(--font-body);
-  font-size: 15px; /* Comfortable legible text size */
+  font-size: 15px; 
   line-height: 24px;
-  border-radius: 0.85rem;
+  border-radius: 1rem; /* Slightly rounder for premium feel */
   padding: 0.85rem 1.15rem;
-  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   outline: none;
-  transition: all 0.2s ease-in-out;
-  min-height: 50px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 52px;
   box-sizing: border-box;
 }
 
@@ -124,42 +132,83 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 3rem !important;
 }
 
+.input-field:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
 .input-field:focus {
   border-color: var(--color-primary);
   background-color: var(--color-surface);
-  box-shadow: 0 0 0 4px rgba(175, 16, 26, 0.12);
+  box-shadow: 0 0 0 4px rgba(175, 16, 26, 0.12), 0 2px 12px rgba(175, 16, 26, 0.08);
 }
 
 .input-field::placeholder {
   color: var(--color-on-surface-variant);
-  opacity: 0.65;
+  opacity: 0.6;
 }
 
-/* === AMBIENT SHADOW from Stitch === */
+/* === GLASSMORPHISM & SHADOWS === */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.7));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
 .shadow-ambient {
-  box-shadow: 0 10px 40px -10px rgba(39, 24, 22, 0.08), 0 4px 12px -4px rgba(39, 24, 22, 0.05);
+  box-shadow: 0 24px 48px -12px rgba(17, 17, 22, 0.12), 0 4px 16px -4px rgba(17, 17, 22, 0.04);
 }
 
 .shadow-level-1 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 12px 32px rgba(17, 17, 22, 0.06), 0 2px 8px rgba(17, 17, 22, 0.03);
+}
+
+.shadow-premium {
+  box-shadow: 0 16px 40px -10px rgba(175, 16, 26, 0.15), 0 6px 16px -4px rgba(0, 0, 0, 0.06);
+}
+
+/* === GRADIENT TEXT === */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #ff4b4b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-white {
+  background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* === DOT PATTERN BACKGROUND === */
 .bg-dots {
-  background-image: radial-gradient(#e4beba 0.5px, transparent 0.5px);
-  background-size: 24px 24px;
+  background-image: radial-gradient(var(--color-outline-variant) 0.5px, transparent 0.5px);
+  background-size: 32px 32px;
+  opacity: 0.8;
 }
 
 /* === MATERIAL SYMBOLS === */
 .material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
   user-select: none;
 }
 .material-symbols-outlined.fill {
-  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+.material-symbols-outlined.bold {
+  font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
 }
 
-/* === LINE CLAMP === */
+/* === UTILITIES === */
 .line-clamp-1 {
   overflow: hidden;
   display: -webkit-box;
@@ -173,7 +222,6 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-line-clamp: 2;
 }
 
-/* Hide scrollbar for clean horizontal pill scrolling on mobile */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -183,12 +231,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* === ANIMATIONS === */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.animate-fade-in {
-  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(175, 16, 26, 0.4); }
+  70% { box-shadow: 0 0 0 12px rgba(175, 16, 26, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(175, 16, 26, 0); }
+}
+.animate-pulse-glow {
+  animation: pulseGlow 2s infinite cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes spin {

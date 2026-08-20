@@ -34,190 +34,171 @@ export default function Home() {
   }
 
   return (
-    <main className="bg-dots pb-20 md:pb-0">
-      {/* Hero Section */}
-      <section className="relative w-full min-h-[540px] sm:min-h-[580px] md:min-h-[660px] flex items-center justify-center overflow-hidden py-14 sm:py-16 md:py-24">
-        {/* Crystal Clear Background Banner Image */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
+    <main className="bg-background pb-20 md:pb-0 overflow-x-hidden">
+      {/* ===== HERO SECTION ===== */}
+      <section className="relative w-full h-[85vh] sm:h-[90vh] flex items-center justify-center overflow-hidden">
+        {/* Full-Width Campus Background */}
+        <div className="absolute inset-0 z-0">
           <img
             src={homeBanner}
-            alt="GEHU Campus Banner"
-            className="w-full h-full object-cover object-center filter brightness-95"
+            alt="Graphic Era Hill University Campus"
+            className="w-full h-full object-cover object-center"
             loading="eager"
           />
-          {/* Light gradient overlay just to protect text contrast while keeping photo 100% visible and clear */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/40" />
+          <div className="absolute inset-0 bg-black/45" />
         </div>
-        <div className="relative z-10 text-center px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto flex flex-col items-center w-full">
-          <div className="bg-black/25 p-6 sm:p-10 md:p-14 rounded-3xl md:rounded-[2.5rem] border border-white/20 shadow-2xl flex flex-col items-center w-full max-w-4xl animate-fade-in">
-            {/* Campus Logo & Tag */}
-            <div className="flex flex-col items-center gap-3 mb-4">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full bg-white p-1.5 shadow-2xl shadow-black/60 border-2 border-white/90 flex items-center justify-center hover:scale-105 transition-transform duration-300">
-                <img
-                  src={gehuLogo}
-                  alt="Graphic Era Hill University Logo"
-                  className="w-full h-full object-contain rounded-full"
-                />
-              </div>
-              <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-xs sm:text-sm font-bold uppercase tracking-widest border border-white/25 shadow-sm">
-                <span>Graphic Era Hill University</span>
-              </div>
-            </div>
 
-            {/* BIG Bold Lost & Found Title */}
-            <div className="flex flex-col items-center mb-4">
-              <span className="text-xs sm:text-sm md:text-base font-black tracking-[0.25em] text-primary-fixed-dim uppercase mb-1">
-                Official Campus Portal
-              </span>
-              <h1 className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-black tracking-tight leading-none uppercase drop-shadow-md">
-                Lost <span className="text-primary-fixed-dim font-black">&</span> Found
-              </h1>
-            </div>
-
-            {/* Aesthetic Tagline */}
-            <p className="font-heading text-lg sm:text-2xl md:text-3xl text-white/95 font-semibold mb-2 tracking-tight">
-              Find what you lost. <span className="text-primary-fixed-dim">Return what you found.</span>
-            </p>
-            <p className="font-body text-xs sm:text-sm md:text-base text-white/80 mb-8 max-w-xl leading-relaxed">
-              Connect with fellow students and campus security to recover lost items across Haldwani campus.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3.5 w-full sm:w-auto">
-              <Link
-                to="/lost"
-                className="w-full sm:w-auto bg-[#ff5722] hover:bg-[#e64a19] text-white font-heading text-base font-bold px-8 py-4 rounded-2xl shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2.5 group"
-              >
-                <span className="material-symbols-outlined text-[24px] group-hover:rotate-12 transition-transform">search</span>
-                <span>I Lost Something</span>
-              </Link>
-              <Link
-                to="/report"
-                className="w-full sm:w-auto bg-[#2e7d32] hover:bg-[#1b5e20] text-white font-heading text-base font-bold px-8 py-4 rounded-2xl shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2.5 group"
-              >
-                <span className="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">volunteer_activism</span>
-                <span>I Found Something</span>
-              </Link>
-            </div>
+        {/* Centered Content */}
+        <div className="relative z-10 text-center px-4 sm:px-6 animate-fade-in-up">
+          <img src={gehuLogo} alt="GEHU" className="w-14 h-14 sm:w-16 sm:h-16 rounded-full mx-auto mb-6 ring-2 ring-white/30 shadow-lg" />
+          <h1 className="font-heading text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] text-white mb-4">
+            Lost <span className="text-gradient">&</span> Found
+          </h1>
+          <p className="font-body text-base sm:text-lg text-white/70 max-w-md mx-auto mb-10">
+            GEHU Haldwani Campus — Find what you lost, return what you found.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              to="/report?type=lost"
+              className="bg-white/10 backdrop-blur-sm text-white font-heading text-sm sm:text-base font-bold px-8 py-3.5 rounded-full border border-white/25 hover:bg-[#ff5722] hover:border-[#ff5722] hover:shadow-[0_0_30px_rgba(255,87,34,0.5)] hover:-translate-y-1 active:scale-[0.97] transition-all duration-300 flex items-center justify-center gap-2.5 group"
+            >
+              <span className="material-symbols-outlined text-[20px] group-hover:-rotate-12 transition-transform duration-300">search</span>
+              I Lost Something
+            </Link>
+            <Link
+              to="/report?type=found"
+              className="bg-white/10 backdrop-blur-sm text-white font-heading text-sm sm:text-base font-bold px-8 py-3.5 rounded-full border border-white/25 hover:bg-[#2e7d32] hover:border-[#2e7d32] hover:shadow-[0_0_30px_rgba(46,125,50,0.5)] hover:-translate-y-1 active:scale-[0.97] transition-all duration-300 flex items-center justify-center gap-2.5 group"
+            >
+              <span className="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform duration-300">volunteer_activism</span>
+              I Found Something
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Quick Actions */}
-      <section className="px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto -mt-8 sm:-mt-12 md:-mt-16 relative z-20 mb-12 md:mb-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+      {/* Bento Box Layout for Quick Actions & Categories */}
+      <section className="px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto -mt-2 relative z-20 mb-20 md:mb-32 pt-14 sm:pt-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 lg:gap-8">
+          
+          {/* Main Action 1 */}
           <Link
             to="/report?type=lost"
-            className="bg-surface-container-lowest rounded-2xl md:rounded-[2rem] p-6 sm:p-8 shadow-level-1 hover:shadow-2xl transition-all border-2 border-status-lost-text/20 hover:border-status-lost-text group cursor-pointer active:scale-[0.99]"
+            className="md:col-span-6 glass-card bg-surface-container-lowest rounded-[2rem] p-8 md:p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-premium group cursor-pointer relative overflow-hidden flex flex-col justify-between min-h-[280px]"
           >
-            <div className="flex items-center gap-4 mb-3">
-              <div className="w-14 h-14 rounded-2xl bg-status-lost-bg text-status-lost-text flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs shrink-0">
-                <span className="material-symbols-outlined fill text-3xl">travel_explore</span>
+            <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-status-lost-text/5 rounded-full transition-transform group-hover:scale-[2] duration-700" />
+            <div className="relative z-10 flex items-center gap-4 mb-6">
+              <div className="w-16 h-16 rounded-[1.25rem] bg-status-lost-bg text-status-lost-text flex items-center justify-center group-hover:rotate-12 transition-transform duration-500 shadow-sm border border-status-lost-text/20">
+                <span className="material-symbols-outlined fill text-4xl">travel_explore</span>
               </div>
-              <div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-status-lost-text bg-status-lost-bg px-2.5 py-0.5 rounded-full">Report Missing</span>
-                <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-on-surface">Lost Something?</h3>
-              </div>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-status-lost-text bg-status-lost-bg/80 px-3 py-1.5 rounded-full border border-status-lost-text/10 backdrop-blur-sm">Report Missing</span>
             </div>
-            <p className="font-body text-sm sm:text-base text-on-surface-variant mb-4 leading-relaxed">
-              Report an item you lost on campus. The student community and security staff will help you find it.
-            </p>
-            <span className="text-status-lost-text font-heading text-sm font-bold flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
-              Report Lost Item <span className="material-symbols-outlined text-sm">arrow_forward</span>
-            </span>
+            <div className="relative z-10">
+              <h3 className="font-heading text-3xl lg:text-4xl font-black text-on-surface tracking-tight mb-3">Lost Something?</h3>
+              <p className="font-body text-sm sm:text-base text-on-surface-variant mb-6 leading-relaxed opacity-90 max-w-sm">
+                Report an item you lost on campus. The student community and security staff will help you find it.
+              </p>
+              <span className="text-status-lost-text font-heading text-base font-bold flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+                File a Report <span className="material-symbols-outlined text-xl">arrow_forward</span>
+              </span>
+            </div>
           </Link>
 
+          {/* Main Action 2 */}
           <Link
             to="/report?type=found"
-            className="bg-surface-container-lowest rounded-2xl md:rounded-[2rem] p-6 sm:p-8 shadow-level-1 hover:shadow-2xl transition-all border-2 border-status-found-text/20 hover:border-status-found-text group cursor-pointer active:scale-[0.99]"
+            className="md:col-span-6 glass-card bg-surface-container-lowest rounded-[2rem] p-8 md:p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-premium group cursor-pointer relative overflow-hidden flex flex-col justify-between min-h-[280px]"
           >
-            <div className="flex items-center gap-4 mb-3">
-              <div className="w-14 h-14 rounded-2xl bg-status-found-bg text-status-found-text flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs shrink-0">
-                <span className="material-symbols-outlined fill text-3xl">check_circle</span>
+            <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-status-found-text/5 rounded-full transition-transform group-hover:scale-[2] duration-700" />
+            <div className="relative z-10 flex items-center gap-4 mb-6">
+              <div className="w-16 h-16 rounded-[1.25rem] bg-status-found-bg text-status-found-text flex items-center justify-center group-hover:-rotate-12 transition-transform duration-500 shadow-sm border border-status-found-text/20">
+                <span className="material-symbols-outlined fill text-4xl">check_circle</span>
               </div>
-              <div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-status-found-text bg-status-found-bg px-2.5 py-0.5 rounded-full">Help Someone</span>
-                <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-on-surface">Found Something?</h3>
-              </div>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-status-found-text bg-status-found-bg/80 px-3 py-1.5 rounded-full border border-status-found-text/10 backdrop-blur-sm">Help Someone</span>
             </div>
-            <p className="font-body text-sm sm:text-base text-on-surface-variant mb-4 leading-relaxed">
-              Help a fellow GEHU student recover their belongings quickly by posting the details here.
-            </p>
-            <span className="text-status-found-text font-heading text-sm font-bold flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
-              Report Found Item <span className="material-symbols-outlined text-sm">arrow_forward</span>
-            </span>
+            <div className="relative z-10">
+              <h3 className="font-heading text-3xl lg:text-4xl font-black text-on-surface tracking-tight mb-3">Found Something?</h3>
+              <p className="font-body text-sm sm:text-base text-on-surface-variant mb-6 leading-relaxed opacity-90 max-w-sm">
+                Help a fellow GEHU student recover their belongings quickly by posting the details here.
+              </p>
+              <span className="text-status-found-text font-heading text-base font-bold flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+                Register Found Item <span className="material-symbols-outlined text-xl">arrow_forward</span>
+              </span>
+            </div>
           </Link>
+
+          {/* Category Bento Cells */}
+          <div className="md:col-span-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mt-2">
+            {categories.map((cat) => (
+              <Link
+                key={cat.label}
+                to={`/lost?category=${cat.value}`}
+                className="group flex flex-col items-center justify-center gap-3 p-6 rounded-[1.5rem] bg-surface-muted hover:bg-white hover:shadow-ambient transition-all duration-300 text-on-surface-variant hover:text-primary border border-outline-variant/30 active:scale-95"
+              >
+                <div className="w-14 h-14 rounded-[1.25rem] bg-surface-container border border-outline-variant/20 flex items-center justify-center group-hover:bg-primary/5 transition-colors duration-300 shadow-sm">
+                  <span className="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform duration-300 text-primary">{cat.icon}</span>
+                </div>
+                <span className="font-heading text-sm font-bold text-center w-full">{cat.label}</span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Recently Added */}
-      <section className="px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto mb-12 md:mb-20">
-        <div className="flex justify-between items-end mb-6 border-b border-surface-muted pb-3">
+      {/* Recently Added List */}
+      <section className="px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto mb-20 md:mb-32">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-10 gap-4">
           <div>
-            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-on-surface">Recently Added</h2>
-            <p className="text-xs sm:text-sm text-on-surface-variant font-body mt-0.5">Latest lost & found items on campus</p>
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-on-surface tracking-tight mb-2">Live Feed</h2>
+            <p className="text-base text-on-surface-variant font-body opacity-90">The latest lost and found updates from around the campus.</p>
           </div>
-          <Link to="/lost" className="text-primary font-body text-xs sm:text-sm font-semibold hover:underline flex items-center gap-1 shrink-0">
-            View All <span className="material-symbols-outlined text-sm">arrow_forward</span>
+          <Link to="/lost" className="text-primary font-heading text-sm font-bold hover:underline flex items-center gap-1.5 shrink-0 group bg-primary/5 px-5 py-2.5 rounded-full border border-primary/10 hover:bg-primary/10 transition-colors">
+            View the Board <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
           </Link>
         </div>
+        
         {loading ? (
-          <div className="flex justify-center py-12">
-            <div className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
+          <div className="flex justify-center py-20">
+            <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
           </div>
         ) : recentItems.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {recentItems.map((item) => (
               <ItemCard key={item.id} item={item} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-12 bg-surface-container-low/40 rounded-2xl border border-outline-variant/30 text-on-surface-variant">
-            <span className="material-symbols-outlined text-5xl mb-3 block opacity-40">inbox</span>
-            <p className="font-body text-base">No active items reported yet. Be the first to help!</p>
+          <div className="text-center py-20 bg-surface-muted/50 rounded-[2rem] border border-outline-variant/30 text-on-surface-variant">
+            <span className="material-symbols-outlined text-6xl mb-4 block opacity-30">inbox</span>
+            <p className="font-heading text-xl font-bold">No items actively listed right now.</p>
+            <p className="font-body text-sm mt-2 opacity-80">Be the first to help someone by reporting a found item.</p>
           </div>
         )}
       </section>
 
-      {/* Browse by Category */}
-      <section className="px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto mb-12 md:mb-20">
-        <h2 className="font-heading text-xl sm:text-2xl font-semibold text-on-surface mb-6 text-center">Browse by Category</h2>
-        <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5 sm:gap-4">
-          {categories.map((cat) => (
-            <Link
-              key={cat.label}
-              to={`/lost?category=${cat.value}`}
-              className="flex flex-col items-center justify-center gap-2 p-3.5 sm:p-4 rounded-2xl bg-surface-muted hover:bg-surface-container-high transition-all text-on-surface-variant hover:text-primary border border-outline-variant/20 hover:border-primary/30 shadow-sm active:scale-95"
-            >
-              <span className="material-symbols-outlined text-2xl sm:text-3xl text-primary">{cat.icon}</span>
-              <span className="font-body text-xs font-semibold text-center truncate w-full">{cat.label}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* How it Works */}
-      <section className="bg-surface-container-low py-12 md:py-20 border-y border-outline-variant/30">
-        <div className="px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto">
-          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-on-surface mb-8 text-center">How It Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative">
+      {/* Modern Workflow Section */}
+      <section className="relative py-24 md:py-32 border-t border-outline-variant/20 overflow-hidden bg-surface-container-lowest">
+        <div className="absolute inset-0 bg-dots opacity-40 z-0" />
+        <div className="px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-primary mb-3 block">Simple Process</span>
+            <h2 className="font-heading text-4xl sm:text-5xl font-black text-on-surface tracking-tight">How it works</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative">
+            {/* Minimal Connecting Line */}
+            <div className="hidden md:block absolute top-12 left-[15%] right-[15%] h-[1px] bg-gradient-to-r from-transparent via-outline-variant to-transparent z-0" />
+            
             {[
-              { num: '1', title: 'Report', desc: 'Submit details about the item you lost or found. Upload clear photos for quick identification.', filled: true },
-              { num: '2', title: 'Browse & Match', desc: 'Search through the active lost and found database with real-time campus categories.', filled: false },
-              { num: '3', title: 'Connect & Return', desc: 'Contact the person via WhatsApp, Phone call, or Email to safely arrange item handover.', filled: false },
-            ].map((step) => (
-              <div key={step.num} className="relative z-10 flex flex-col items-center text-center p-5 sm:p-6 bg-surface-container-lowest/80 rounded-2xl border border-outline-variant/30 shadow-sm">
-                <div
-                  className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center font-heading text-xl sm:text-2xl mb-4 shadow-sm ${
-                    step.filled
-                      ? 'bg-primary text-on-primary'
-                      : 'bg-surface-container-lowest border-2 border-primary text-primary'
-                  }`}
-                >
-                  {step.num}
+              { icon: 'add_a_photo', title: '1. File a Report', desc: 'Provide details and images of the item you lost or found.' },
+              { icon: 'manage_search', title: '2. Search & Match', desc: 'Browse the live feed or wait for the community to find a match.' },
+              { icon: 'handshake', title: '3. Connect & Return', desc: 'Securely contact the finder/owner to safely return the item.' },
+            ].map((step, idx) => (
+              <div key={idx} className="relative z-10 flex flex-col items-center text-center p-8 bg-surface-muted rounded-[2rem] border border-outline-variant/30 hover:bg-white hover:shadow-premium transition-all duration-500 hover:-translate-y-2 group">
+                <div className="w-20 h-20 rounded-[1.5rem] bg-white border border-outline-variant/30 flex items-center justify-center font-heading text-3xl font-black mb-6 shadow-sm text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                  <span className="material-symbols-outlined text-4xl">{step.icon}</span>
                 </div>
-                <h3 className="font-heading text-lg sm:text-xl font-semibold text-on-surface mb-2">{step.title}</h3>
-                <p className="font-body text-sm sm:text-base text-on-surface-variant leading-relaxed">{step.desc}</p>
+                <h3 className="font-heading text-2xl font-bold text-on-surface mb-3 tracking-tight">{step.title}</h3>
+                <p className="font-body text-base text-on-surface-variant leading-relaxed opacity-90">{step.desc}</p>
               </div>
             ))}
           </div>

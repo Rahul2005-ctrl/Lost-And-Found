@@ -37,6 +37,8 @@ const currentLocations = [
 
 export default function ReportItem() {
   const [searchParams] = useSearchParams()
+  const editId = searchParams.get('edit')
+  
   const [type, setType] = useState(searchParams.get('type') || 'lost')
   const [form, setForm] = useState({
     item_name: '', category: '', date: '', time: '', location: '',
@@ -45,23 +47,64 @@ export default function ReportItem() {
   })
   const [imageFile, setImageFile] = useState(null)
   const [imagePreview, setImagePreview] = useState(null)
+  const [existingImageUrl, setExistingImageUrl] = useState(null)
+  
   const [loading, setLoading] = useState(false)
+  const [fetching, setFetching] = useState(!!editId)
   const [error, setError] = useState('')
   const { user, profile } = useAuth()
   const navigate = useNavigate()
 
-  // Pre-fill phone from profile when available
-  useEffect(() => {
-    if (profile?.phone && !form.contact_phone) {
-      setForm(prev => ({ ...prev, contact_phone: profile.phone }))
-    }
-  }, [profile])
-
   useEffect(() => {
     if (!user) {
-      navigate('/login', { state: { from: '/report' } })
+      navigate('/login', { state: { from: editId ? `/report?edit=${editId}` : '/report' } })
     }
-  }, [user, navigate])
+  }, [user, navigate, editId])
+
+  // Fetch item if in edit mode
+  useEffect(() => {
+    if (!editId || !user) return;
+    async function fetchItem() {
+      try {
+        const { data, error } = await supabase.from('items').select('*').eq('id', editId).single()
+        if (error) throw error
+        if (data.user_id !== user.id) {
+          setError('You do not have permission to edit this item.')
+          return
+        }
+        setType(data.type)
+        setForm({
+          item_name: data.item_name || '',
+          category: data.category || '',
+          date: data.date || '',
+          time: data.time || '',
+          location: data.location || '',
+          specific_location: data.specific_location || '',
+          description: data.description || '',
+          current_location: data.current_location || '',
+          contact_method: data.contact_method || 'email',
+          contact_phone: data.contact_phone || '',
+        })
+        if (data.image_url) {
+          setExistingImageUrl(data.image_url)
+          setImagePreview(data.image_url)
+        }
+      } catch (err) {
+        console.error('Error fetching item for edit:', err)
+        setError('Failed to load item for editing.')
+      } finally {
+        setFetching(false)
+      }
+    }
+    fetchItem()
+  }, [editId, user])
+
+  // Pre-fill phone from profile when available, only if not editing or phone is empty
+  useEffect(() => {
+    if (profile?.phone && !form.contact_phone && !fetching) {
+      setForm(prev => ({ ...prev, contact_phone: profile.phone }))
+    }
+  }, [profile, fetching])
 
   const update = (field) => (e) => setForm({ ...form, [field]: e.target.value })
   const isLost = type === 'lost'
@@ -72,7 +115,9 @@ export default function ReportItem() {
     setLoading(true)
 
     try {
-      let imageUrl = null
+      let finalImageUrl = existingImageUrl
+      
+      // If user selected a new image
       if (imageFile) {
         const fileExt = imageFile.name.split('.').pop()
         const filePath = `${user.id}/${Date.now()}.${fileExt}`
@@ -81,7 +126,10 @@ export default function ReportItem() {
           .upload(filePath, imageFile)
         if (uploadError) throw uploadError
         const { data: urlData } = supabase.storage.from('item-images').getPublicUrl(filePath)
-        imageUrl = urlData.publicUrl
+        finalImageUrl = urlData.publicUrl
+      } else if (!imagePreview && existingImageUrl) {
+        // If user cleared the image preview, remove the image
+        finalImageUrl = null
       }
 
       // Ensure profile exists
@@ -96,12 +144,12 @@ export default function ReportItem() {
         })
       }
 
-      const { error: insertError } = await supabase.from('items').insert({
+      const itemData = {
         user_id: user.id,
         type,
         item_name: form.item_name,
         category: form.category,
-        image_url: imageUrl,
+        image_url: finalImageUrl,
         date: form.date,
         time: form.time || null,
         location: form.location,
@@ -112,61 +160,77 @@ export default function ReportItem() {
         contact_phone: (form.contact_method === 'phone' || form.contact_method === 'whatsapp') ? (form.contact_phone || null) : null,
         contact_email: user.email || null,
         status: 'active',
-      })
-      if (insertError) throw insertError
-      navigate(type === 'lost' ? '/lost' : '/found')
+      }
+
+      if (editId) {
+        const { error: updateError } = await supabase.from('items').update(itemData).eq('id', editId)
+        if (updateError) throw updateError
+        navigate(`/item/${editId}`)
+      } else {
+        const { error: insertError } = await supabase.from('items').insert(itemData)
+        if (insertError) throw insertError
+        navigate(type === 'lost' ? '/lost' : '/found')
+      }
     } catch (err) {
-      console.error('Error posting item:', err)
-      setError(err.message || 'Failed to post item. Please try again.')
+      console.error('Error saving item:', err)
+      setError(err.message || 'Failed to save item. Please try again.')
     }
     setLoading(false)
   }
 
-  if (!user) return null
+  if (!user || fetching) {
+    return (
+      <main className="flex-grow flex items-center justify-center min-h-screen">
+        <div className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
+      </main>
+    )
+  }
 
   return (
     <main className="flex-grow w-full px-4 sm:px-6 max-w-3xl mx-auto py-6 sm:py-10 pb-24 md:pb-12">
       {/* Header */}
       <div className="text-center mb-6 sm:mb-8">
         <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-bold text-on-surface mb-2 tracking-tight">
-          Report an Item
+          {editId ? 'Edit Item' : 'Report an Item'}
         </h1>
         <p className="font-body text-sm sm:text-base text-on-surface-variant max-w-lg mx-auto">
-          Help keep our GEHU campus connected. Fill in the details below to notify others.
+          {editId ? 'Update the details for your post below.' : 'Help keep our GEHU campus connected. Fill in the details below to notify others.'}
         </p>
       </div>
 
-      {/* Type Toggle */}
-      <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-        <button
-          type="button"
-          onClick={() => setType('lost')}
-          className={`group relative rounded-2xl p-4 sm:p-6 flex flex-col items-center justify-center gap-2 sm:gap-3 transition-all duration-200 hover:shadow-md active:scale-95 border-2 min-h-[90px] ${
-            isLost
-              ? 'bg-status-lost-bg border-status-lost-text shadow-sm'
-              : 'bg-surface-muted border-transparent opacity-75 hover:opacity-100'
-          }`}
-        >
-          <span className={`material-symbols-outlined text-3xl sm:text-4xl ${isLost ? 'text-status-lost-text fill' : 'text-on-surface-variant'}`}>search</span>
-          <span className={`font-heading text-xs sm:text-base font-bold uppercase tracking-wider ${isLost ? 'text-status-lost-text' : 'text-on-surface-variant'}`}>
-            I Lost Something
-          </span>
-        </button>
-        <button
-          type="button"
-          onClick={() => setType('found')}
-          className={`group relative rounded-2xl p-4 sm:p-6 flex flex-col items-center justify-center gap-2 sm:gap-3 transition-all duration-200 hover:shadow-md active:scale-95 border-2 min-h-[90px] ${
-            !isLost
-              ? 'bg-status-found-bg border-status-found-text shadow-sm'
-              : 'bg-surface-muted border-transparent opacity-75 hover:opacity-100'
-          }`}
-        >
-          <span className={`material-symbols-outlined text-3xl sm:text-4xl ${!isLost ? 'text-status-found-text fill' : 'text-on-surface-variant'}`}>volunteer_activism</span>
-          <span className={`font-heading text-xs sm:text-base font-bold uppercase tracking-wider ${!isLost ? 'text-status-found-text' : 'text-on-surface-variant'}`}>
-            I Found Something
-          </span>
-        </button>
-      </div>
+      {/* Type Toggle (Disabled if editing to prevent changing item type mid-way) */}
+      {!editId && (
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <button
+            type="button"
+            onClick={() => setType('lost')}
+            className={`group relative rounded-2xl p-4 sm:p-6 flex flex-col items-center justify-center gap-2 sm:gap-3 transition-all duration-200 hover:shadow-md active:scale-95 border-2 min-h-[90px] ${
+              isLost
+                ? 'bg-status-lost-bg border-status-lost-text shadow-sm'
+                : 'bg-surface-muted border-transparent opacity-75 hover:opacity-100'
+            }`}
+          >
+            <span className={`material-symbols-outlined text-3xl sm:text-4xl ${isLost ? 'text-status-lost-text fill' : 'text-on-surface-variant'}`}>search</span>
+            <span className={`font-heading text-xs sm:text-base font-bold uppercase tracking-wider ${isLost ? 'text-status-lost-text' : 'text-on-surface-variant'}`}>
+              I Lost Something
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setType('found')}
+            className={`group relative rounded-2xl p-4 sm:p-6 flex flex-col items-center justify-center gap-2 sm:gap-3 transition-all duration-200 hover:shadow-md active:scale-95 border-2 min-h-[90px] ${
+              !isLost
+                ? 'bg-status-found-bg border-status-found-text shadow-sm'
+                : 'bg-surface-muted border-transparent opacity-75 hover:opacity-100'
+            }`}
+          >
+            <span className={`material-symbols-outlined text-3xl sm:text-4xl ${!isLost ? 'text-status-found-text fill' : 'text-on-surface-variant'}`}>volunteer_activism</span>
+            <span className={`font-heading text-xs sm:text-base font-bold uppercase tracking-wider ${!isLost ? 'text-status-found-text' : 'text-on-surface-variant'}`}>
+              I Found Something
+            </span>
+          </button>
+        </div>
+      )}
 
       {/* Form */}
       <div className="bg-surface rounded-2xl sm:rounded-3xl shadow-level-1 p-4 sm:p-6 md:p-8 border border-outline-variant/30 relative overflow-hidden">
@@ -339,7 +403,7 @@ export default function ReportItem() {
               ) : (
                 <>
                   <span className="material-symbols-outlined text-[22px]">{isLost ? 'search' : 'volunteer_activism'}</span>
-                  <span>Post {isLost ? 'Lost' : 'Found'} Item</span>
+                  <span>{editId ? 'Update Item' : `Post ${isLost ? 'Lost' : 'Found'} Item`}</span>
                 </>
               )}
             </button>
