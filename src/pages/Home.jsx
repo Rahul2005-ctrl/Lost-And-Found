@@ -49,15 +49,15 @@ export default function Home() {
         </div>
 
         {/* Centered Content Box */}
-        <div className="relative z-10 text-center px-6 sm:px-12 py-10 sm:py-14 mx-4 max-w-3xl w-full bg-black/40 backdrop-blur-[2px] rounded-[2rem] border border-white/10 shadow-2xl animate-fade-in-up">
-          <img src={gehuLogo} alt="GEHU" className="w-14 h-14 sm:w-16 sm:h-16 rounded-full mx-auto mb-6 ring-2 ring-white/30 shadow-lg" />
-          <h1 className="font-heading text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] text-white mb-4">
+        <div className="relative z-10 text-center px-6 sm:px-12 md:px-16 lg:px-24 py-10 sm:py-14 md:py-20 lg:py-24 mx-4 md:mx-auto max-w-3xl lg:max-w-4xl xl:max-w-5xl w-full bg-black/40 md:bg-black/50 backdrop-blur-md md:backdrop-blur-lg rounded-[2rem] md:rounded-[3rem] border border-white/10 md:border-white/20 shadow-2xl animate-fade-in-up">
+          <img src={gehuLogo} alt="GEHU" className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full mx-auto mb-6 md:mb-8 ring-2 md:ring-4 ring-white/30 shadow-lg" />
+          <h1 className="font-heading text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] text-white mb-4 md:mb-6">
             Lost <span className="text-gradient">&</span> Found
           </h1>
-          <p className="font-body text-base sm:text-lg text-white/70 max-w-md mx-auto mb-10">
+          <p className="font-body text-base sm:text-lg md:text-xl lg:text-2xl text-white/70 md:text-white/80 max-w-md md:max-w-2xl lg:max-w-3xl mx-auto mb-10 md:mb-12">
             GEHU Haldwani Campus — Find what you lost, return what you found.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-5 justify-center">
             <Link
               to="/report?type=lost"
               className="bg-white/10 backdrop-blur-sm text-white font-heading text-sm sm:text-base font-bold px-8 py-3.5 rounded-full border border-white/25 hover:bg-[#ff5722] hover:border-[#ff5722] hover:shadow-[0_0_30px_rgba(255,87,34,0.5)] hover:-translate-y-1 active:scale-[0.97] transition-all duration-300 flex items-center justify-center gap-2.5 group"
@@ -77,7 +77,7 @@ export default function Home() {
       </section>
 
       {/* Bento Box Layout for Quick Actions & Categories */}
-      <section className="px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto -mt-2 relative z-20 mb-20 md:mb-32 pt-14 sm:pt-16">
+      <section className="px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto -mt-6 md:-mt-16 lg:-mt-24 xl:-mt-32 relative z-20 mb-20 md:mb-32 pt-14 sm:pt-16 md:pt-0">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 lg:gap-8">
           
           {/* Main Action 1 */}
