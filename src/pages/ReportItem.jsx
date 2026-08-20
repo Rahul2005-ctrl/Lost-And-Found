@@ -285,7 +285,7 @@ export default function ReportItem() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block font-body text-xs sm:text-sm font-semibold text-on-surface-variant mb-1.5" htmlFor="location">
-                Location on Campus *
+                Location of Campus *
               </label>
               <div className="relative">
                 <select id="location" className="input-field appearance-none pr-10" value={form.location} onChange={update('location')} required>
