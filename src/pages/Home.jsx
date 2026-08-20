@@ -45,11 +45,11 @@ export default function Home() {
             className="w-full h-full object-cover object-center"
             loading="eager"
           />
-          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-black/45 md:bg-black/50" />
         </div>
-
+ 
         {/* Centered Content Box */}
-        <div className="relative z-10 text-center px-6 sm:px-12 md:px-16 lg:px-24 py-10 sm:py-14 md:py-20 lg:py-24 mx-4 md:mx-auto max-w-3xl lg:max-w-4xl xl:max-w-5xl w-full bg-black/40 md:bg-black/50 backdrop-blur-md md:backdrop-blur-lg rounded-[2rem] md:rounded-[3rem] border border-white/10 md:border-white/20 shadow-2xl animate-fade-in-up">
+        <div className="relative z-10 text-center px-6 sm:px-12 md:px-16 lg:px-24 py-10 sm:py-14 md:py-20 lg:py-24 mx-4 md:mx-auto max-w-3xl lg:max-w-4xl xl:max-w-5xl w-full bg-black/75 md:bg-black/85 backdrop-blur-md md:backdrop-blur-lg rounded-[2rem] md:rounded-[3rem] border border-white/10 md:border-white/20 shadow-2xl animate-fade-in-up">
           <img src={gehuLogo} alt="GEHU" className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full mx-auto mb-6 md:mb-8 ring-2 md:ring-4 ring-white/30 shadow-lg" />
           <h1 className="font-heading text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] text-white mb-4 md:mb-6">
             Lost <span className="text-gradient">&</span> Found
@@ -77,7 +77,7 @@ export default function Home() {
       </section>
 
       {/* Bento Box Layout for Quick Actions & Categories */}
-      <section className="px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto -mt-6 md:-mt-16 lg:-mt-24 xl:-mt-32 relative z-20 mb-20 md:mb-32 pt-14 sm:pt-16 md:pt-0">
+      <section className="px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto -mt-6 md:-mt-10 lg:-mt-14 xl:-mt-16 relative z-20 mb-20 md:mb-32 pt-14 sm:pt-16 md:pt-0">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 lg:gap-8">
           
           {/* Main Action 1 */}
@@ -177,7 +177,7 @@ export default function Home() {
 
       {/* Modern Workflow Section */}
       <section className="relative py-24 md:py-32 border-t border-outline-variant/20 overflow-hidden bg-surface-container-lowest">
-        <div className="absolute inset-0 bg-dots opacity-40 z-0" />
+        <div className="absolute inset-0 bg-dots opacity-[0.15] md:opacity-[0.06] z-0" />
         <div className="px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto relative z-10">
           <div className="text-center mb-16">
             <span className="text-xs font-black uppercase tracking-[0.2em] text-primary mb-3 block">Simple Process</span>
