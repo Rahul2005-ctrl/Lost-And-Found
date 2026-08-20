@@ -4,8 +4,14 @@ import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 
 export default function EditProfile() {
-  const { profile, updateProfile, user } = useAuth()
+  const { profile, updateProfile, user, loading: authLoading } = useAuth()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      navigate('/login', { state: { from: '/profile/edit' } })
+    }
+  }, [user, authLoading, navigate])
   const [form, setForm] = useState({
     name: profile?.name || '',
     phone: profile?.phone || '',
@@ -78,6 +84,14 @@ export default function EditProfile() {
       setError(err.message || 'Failed to update profile.')
     }
     setLoading(false)
+  }
+
+  if (authLoading || !user) {
+    return (
+      <main className="flex-grow flex items-center justify-center min-h-screen">
+        <div className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
+      </main>
+    )
   }
 
   return (

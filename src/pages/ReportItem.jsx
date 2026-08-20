@@ -52,14 +52,14 @@ export default function ReportItem() {
   const [loading, setLoading] = useState(false)
   const [fetching, setFetching] = useState(!!editId)
   const [error, setError] = useState('')
-  const { user, profile } = useAuth()
+  const { user, profile, loading: authLoading } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!user) {
+    if (!authLoading && !user) {
       navigate('/login', { state: { from: editId ? `/report?edit=${editId}` : '/report' } })
     }
-  }, [user, navigate, editId])
+  }, [user, authLoading, navigate, editId])
 
   // Fetch item if in edit mode
   useEffect(() => {
@@ -178,7 +178,7 @@ export default function ReportItem() {
     setLoading(false)
   }
 
-  if (!user || fetching) {
+  if (authLoading || !user || fetching) {
     return (
       <main className="flex-grow flex items-center justify-center min-h-screen">
         <div className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />

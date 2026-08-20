@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react'
-import { useSearchParams, Link } from 'react-router-dom'
+import { useSearchParams, Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import ItemCard from '../components/ItemCard'
 
 export default function MyItems() {
-  const { user } = useAuth()
+  const { user, loading: authLoading } = useAuth()
+  const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const type = searchParams.get('type') || 'lost'
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (!authLoading && !user) {
+      navigate('/login', { state: { from: `/profile/my-items?type=${type}` } })
+    }
     if (user) fetchItems()
-  }, [user, type])
+  }, [user, authLoading, type, navigate])
 
   async function fetchItems() {
     setLoading(true)
@@ -28,6 +32,14 @@ export default function MyItems() {
   }
 
   const isLost = type === 'lost'
+
+  if (authLoading || !user) {
+    return (
+      <main className="flex-grow flex items-center justify-center min-h-screen">
+        <div className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
+      </main>
+    )
+  }
 
   return (
     <main className="flex-grow w-full px-4 sm:px-6 md:px-gutter max-w-container-max mx-auto py-6 sm:py-10 pb-24 md:pb-12">
