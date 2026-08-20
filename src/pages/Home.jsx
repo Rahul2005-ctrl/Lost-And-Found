@@ -48,8 +48,8 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/45" />
         </div>
 
-        {/* Centered Content */}
-        <div className="relative z-10 text-center px-4 sm:px-6 animate-fade-in-up">
+        {/* Centered Content Box */}
+        <div className="relative z-10 text-center px-6 sm:px-12 py-10 sm:py-14 mx-4 max-w-3xl w-full bg-black/25 backdrop-blur-md rounded-[2rem] border border-white/10 shadow-2xl animate-fade-in-up">
           <img src={gehuLogo} alt="GEHU" className="w-14 h-14 sm:w-16 sm:h-16 rounded-full mx-auto mb-6 ring-2 ring-white/30 shadow-lg" />
           <h1 className="font-heading text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] text-white mb-4">
             Lost <span className="text-gradient">&</span> Found
