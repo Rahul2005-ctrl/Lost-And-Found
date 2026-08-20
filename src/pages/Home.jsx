@@ -49,7 +49,7 @@ export default function Home() {
         </div>
  
         {/* Centered Content Box */}
-        <div className="relative z-10 text-center px-6 sm:px-12 md:px-16 lg:px-24 py-10 sm:py-14 md:py-20 lg:py-24 mx-4 md:mx-auto max-w-3xl lg:max-w-4xl xl:max-w-5xl w-full bg-black/20 md:bg-black/30 backdrop-blur-[2px] rounded-[2rem] md:rounded-[3rem] border border-white/10 md:border-white/20 shadow-2xl animate-fade-in-up">
+        <div className="relative z-10 text-center px-6 sm:px-12 md:px-16 lg:px-24 py-10 sm:py-14 md:py-20 lg:py-24 w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)] md:w-full md:mx-auto max-w-3xl lg:max-w-4xl xl:max-w-5xl bg-black/30 md:bg-black/20 backdrop-blur-[2px] rounded-[2rem] md:rounded-[3rem] border border-white/10 md:border-white/20 shadow-2xl animate-fade-in-up">
           <img src={gehuLogo} alt="GEHU" className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full mx-auto mb-6 md:mb-8 ring-2 md:ring-4 ring-white/30 shadow-lg" />
           <h1 className="font-heading text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] text-white mb-4 md:mb-6">
             Lost <span className="text-gradient">&</span> Found
